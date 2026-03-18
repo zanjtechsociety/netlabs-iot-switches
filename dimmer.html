@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC  BULB DIMMER</title>
+    <link rel="stylesheet" href="dimmer.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AC DIMMER</h1>
+        <div class="status">
+            power status<span class="indicator" id="indicator"></span>
+        </div>
+        <div class="bulb" id="bulb">💡</div>
+        <button onclick="togglePower()">toggle power</button>
+
+        <br><br>
+        <input type="range" min="0" max="100" value="50" class="slider" id="brightnessSlider">
+        <div>Brightness:<span id="brightnessValue">50</span>  % </div>
+
+    </div>
+<script>
+
+    let power=true;
+const bulb = document.getElementById("bulb");
+const indicator = document.getElementById("indicator");
+const slider = document.getElementById("brightnessSlider");
+const valueText = document.getElementById("brightnessValue");
+
+function togglePower(){
+
+    power = !power;
+
+    if(power){
+        indicator.style.background = "lime";
+        updateBrightness();
+    }
+    else{
+        indicator.style.background = "red";
+        bulb.style.color = "gray";
+    }
+
+}
+
+slider.addEventListener("input", updateBrightness);
+
+function updateBrightness(){
+
+    let brightness = slider.value;
+    valueText.innerText = brightness;
+
+if(power){
+        bulb.style.color = `rgba(255, 255, 0, ${brightness/100})`;
+    }
+
+}
+
+</script>
+
+</body>
+</html>
